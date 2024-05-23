@@ -27,20 +27,29 @@ export function useJettonContract() {
   }, [client, wallet])
 
   const jettonWalletContract = useAsyncInitialize(async () => {
-    if (!jettonContract || !client) return
+    if (!jettonContract || !client || !wallet) return null
 
-    const jettonWalletAddress = await jettonContract.getGetWalletAddress(
-      Address.parse(wallet!)
-    )
-
-    return client.open(JettonDefaultWallet.fromAddress(jettonWalletAddress))
-  }, [jettonContract, client])
+    try {
+      const jettonWalletAddress = await jettonContract.getGetWalletAddress(
+        Address.parse(wallet)
+      )
+      return client.open(JettonDefaultWallet.fromAddress(jettonWalletAddress))
+    } catch (error) {
+      console.error("Ошибка при получении адреса Jetton Wallet:", error)
+      return null
+    }
+  }, [jettonContract, client, wallet])
 
   const fetchBalance = useCallback(async () => {
     if (!jettonWalletContract) return
     setBalance(null)
-    const walletData = await jettonWalletContract.getGetWalletData()
-    setBalance(fromNano(walletData.balance))
+    try {
+      const walletData = await jettonWalletContract.getGetWalletData()
+      setBalance(fromNano(walletData.balance))
+    } catch (error) {
+      console.error("Ошибка при получении данных кошелька Jetton:", error)
+      setBalance(null)
+    }
   }, [jettonWalletContract])
 
   useEffect(() => {

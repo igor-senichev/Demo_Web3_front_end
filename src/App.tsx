@@ -96,10 +96,10 @@ function App() {
             </Button>
           </FlexBoxRow>
           <Jetton balance={balance} />
-          {userWalletAddress && (
+          {/* {userWalletAddress && (
             <div>Адрес кошелька пользователя в HEX: {userWalletAddress}</div>
           )}
-          {userId && <div>ID пользователя: {userId}</div>}
+          {userId && <div>ID пользователя: {userId}</div>} */}
         </FlexBoxCol>
       </AppContainer>
     </StyledApp>
