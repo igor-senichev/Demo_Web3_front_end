@@ -1,0 +1,67 @@
+@import "../../assets/styles/variables.scss";
+
+.container {
+  width: 375px;
+  height: 800px;
+  border: 2px solid gray;
+  border-radius: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 16px;
+}
+
+.centralBlock {
+  width: 343px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.sections {
+  font-family: $font-family;
+  font-weight: 600;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-align: left;
+  color: $chernyy;
+}
+
+.loginWindowWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex: 1;
+}
+
+.backButton {
+  border: 1px solid $chernyy;
+  border-radius: 16px;
+  padding: 8px 16px;
+  background: $total-black;
+  font-family: $font-family;
+  font-weight: 600;
+  font-size: 16px;
+  color: $white;
+  cursor: pointer;
+  margin-bottom: 60px;
+  align-self: center;
+}
+
+.backButton:hover {
+  background: $blue;
+  color: $total-black;
+}
+
+.footer {
+  margin-top: auto;
+}

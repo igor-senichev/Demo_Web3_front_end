@@ -13,9 +13,10 @@ import {
 
 interface JettonProps {
   balance: number | null
+  onNavigate: (page: string) => void
 }
 
-export function Jetton({ balance }: JettonProps) {
+export function Jetton({ balance, onNavigate }: JettonProps) {
   const { connected, wallet } = useTonConnect()
   const {
     jettonWalletAddress,
@@ -60,13 +61,13 @@ export function Jetton({ balance }: JettonProps) {
       <FlexBoxCol>
         <h3>Toncoin</h3>
         <FlexBoxRow>
-          User Wallet:
+          <div style={{ whiteSpace: "nowrap" }}>User Wallet:</div>
           <Ellipsis>
             {wallet ? Address.parse(wallet as string).toString() : "Loading..."}
           </Ellipsis>
         </FlexBoxRow>
         <FlexBoxRow>
-          Master Wallet:
+          <div style={{ whiteSpace: "nowrap" }}>Master Wallet:</div>
           <Ellipsis>{masterWalletAddress || "Loading..."}</Ellipsis>
         </FlexBoxRow>
         <FlexBoxRow style={{ marginTop: "20px" }}>

@@ -1,17 +1,31 @@
-// src/pages/PersonalAccount/PersonalAccount.tsx
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./PersonalAccount.module.scss"
 import HeaderApps from "../../components/headerApps"
 import FooterApps from "../../components/footerApps"
 import TonGameCoinIcon from "../../assets/img/TonGmameCoin.svg"
+import { useTonConnect } from "../../hooks/useTonConnect"
 
 const PersonalAccount: React.FC = () => {
   const navigate = useNavigate()
+  const { disconnect } = useTonConnect() // Получаю функцию для отключения кошелька
   const [amountTonGame, setAmountTonGame] = useState(0.0) // Инициализирую переменную с балансом
 
   const handleLoginClick = () => {
-    navigate("#")
+    navigate("/login")
+  }
+
+  const handleLoginClick2 = () => {
+    navigate("/transfer-of-funds-from-wallet")
+  }
+
+  const handleLoginClick3 = () => {
+    navigate("/withdrawal-of-funds-to-wallet")
+  }
+
+  const handleDisconnectClick = () => {
+    disconnect() // Сбрасываю авторизацию кошелька
+    navigate("/login")
   }
 
   return (
@@ -37,13 +51,13 @@ const PersonalAccount: React.FC = () => {
             <div className={styles.walletOptions}>
               <button
                 className={styles.walletButton}
-                onClick={handleLoginClick}
+                onClick={handleLoginClick2}
               >
                 Депозит
               </button>
               <button
                 className={styles.walletButton}
-                onClick={handleLoginClick}
+                onClick={handleLoginClick3}
               >
                 Вывести
               </button>
@@ -51,7 +65,7 @@ const PersonalAccount: React.FC = () => {
           </div>
           <button
             className={styles.disconnectButton}
-            onClick={handleLoginClick}
+            onClick={handleDisconnectClick}
           >
             Отключить
           </button>

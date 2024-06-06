@@ -1,39 +1,23 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
-import "./TONLoginWindow.module.scss"
+import styles from "./TonTranslation.module.scss"
 import { Jetton } from "../../components/Jetton"
-import styled from "styled-components"
 import { Button, FlexBoxCol, FlexBoxRow } from "../../components/styled/styled"
 import { CHAIN, TonConnectButton, useTonWallet } from "@tonconnect/ui-react"
 import { useTonConnect } from "../../hooks/useTonConnect"
 import "@twa-dev/sdk"
 import { useTonClient } from "../../hooks/useTonClient"
 import { Address, fromNano } from "ton"
+import { useNavigate } from "react-router-dom"
 
-const StyledApp = styled.div`
-  background-color: #e8e8e8;
-  color: black;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #222;
-    color: white;
-  }
-  min-height: 100vh;
-  padding: 20px 20px;
-`
-
-const AppContainer = styled.div`
-  max-width: 900px;
-  margin: 0 auto;
-`
-
-function TONLoginWindow() {
+const TonTranslation: React.FC = () => {
   const { network } = useTonConnect()
   const wallet = useTonWallet()
   const [userWalletAddress, setUserWalletAddress] = useState<string>("")
   const [userId, setUserId] = useState<string | null>(null)
   const [balance, setBalance] = useState<number | null>(null)
   const { client } = useTonClient()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const sendWalletAddressToBackend = async (address: string) => {
@@ -82,8 +66,8 @@ function TONLoginWindow() {
   }, [client, userWalletAddress])
 
   return (
-    <StyledApp>
-      <AppContainer>
+    <div className={styles.styledApp}>
+      <div className={styles.appContainer}>
         <FlexBoxCol>
           <FlexBoxRow>
             <TonConnectButton />
@@ -95,15 +79,15 @@ function TONLoginWindow() {
                 : "N/A"}
             </Button>
           </FlexBoxRow>
-          <Jetton balance={balance} />
+          <Jetton balance={balance} onNavigate={navigate} />
           {/* {userWalletAddress && (
             <div>Адрес кошелька пользователя в HEX: {userWalletAddress}</div>
           )}
           {userId && <div>ID пользователя: {userId}</div>} */}
         </FlexBoxCol>
-      </AppContainer>
-    </StyledApp>
+      </div>
+    </div>
   )
 }
 
-export default TONLoginWindow
+export default TonTranslation

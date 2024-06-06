@@ -11,6 +11,8 @@ import OperationsHistory from "./pages/OperationsHistory/OperationsHistory"
 import ExchangingResources from "./pages/ExchangingResources/ExchangingResources"
 import PurchasingResources from "./pages/PurchasingResources/PurchasingResources"
 import ApplicationLoginPage from "./pages/ApplicationLoginPage/ApplicationLoginPage"
+import TransferOfFundsFromWallet from "./pages/TransferOfFundsFromWallet/TransferOfFundsFromWallet"
+import WithdrawalOfFundsToWallet from "./pages/WithdrawalOfFundsToWallet/WithdrawalOfFundsToWallet"
 
 function App() {
   return (
@@ -21,6 +23,14 @@ function App() {
         <Route
           path="/application-login-page"
           element={<ApplicationLoginPage />}
+        />
+        <Route
+          path="/transfer-of-funds-from-wallet"
+          element={<TransferOfFundsFromWallet />}
+        />
+        <Route
+          path="/withdrawal-of-funds-to-wallet"
+          element={<WithdrawalOfFundsToWallet />}
         />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/home" element={<HomePage />} />

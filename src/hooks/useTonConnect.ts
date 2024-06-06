@@ -8,23 +8,36 @@ export function useTonConnect(): {
   connected: boolean
   wallet: string | null
   network: CHAIN | null
+  disconnect: () => void
 } {
   const [tonConnectUI] = useTonConnectUI()
   const wallet = useTonWallet()
 
+  const disconnect = () => {
+    if (tonConnectUI && wallet) {
+      tonConnectUI.disconnect()
+    } else {
+      console.error("tonConnectUI or wallet is not available")
+    }
+  }
+
   return {
     sender: {
       send: async (args: SenderArguments) => {
-        tonConnectUI.sendTransaction({
-          messages: [
-            {
-              address: args.to.toString(),
-              amount: args.value.toString(),
-              payload: args.body?.toBoc().toString("base64"),
-            },
-          ],
-          validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes for user to approve
-        })
+        if (tonConnectUI) {
+          tonConnectUI.sendTransaction({
+            messages: [
+              {
+                address: args.to.toString(),
+                amount: args.value.toString(),
+                payload: args.body?.toBoc().toString("base64"),
+              },
+            ],
+            validUntil: Date.now() + 5 * 60 * 1000, // 5 minutes for user to approve
+          })
+        } else {
+          console.error("tonConnectUI is not available")
+        }
       },
       address: wallet?.account?.address
         ? Address.parse(wallet?.account?.address as string)
@@ -34,5 +47,6 @@ export function useTonConnect(): {
     connected: !!wallet?.account.address,
     wallet: wallet?.account.address ?? null,
     network: wallet?.account.chain ?? null,
+    disconnect,
   }
 }
