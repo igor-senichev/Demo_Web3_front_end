@@ -1,0 +1,140 @@
+@import "../../assets/styles/variables.scss";
+
+.container {
+  width: 375px;
+  height: 800px;
+  border: 2px solid gray;
+  border-radius: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 16px;
+}
+
+.centralBlock {
+  width: 343px;
+  height: 576px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.contentFilling {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sections {
+  font-family: $font-family;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 62%;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: $chernyy;
+  margin-bottom: 48px;
+}
+
+.walletOperations {
+  width: 343px;
+  height: 109px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32px;
+}
+
+.walletDetails {
+  width: 150px;
+  height: 57px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.balanceRow {
+  display: flex;
+  align-items: center;
+}
+
+.amountTonGameBlock {
+  font-family: $font-family;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 62%;
+  letter-spacing: -0.02em;
+  text-align: right;
+  color: $chernyy;
+  margin-right: 8px;
+}
+
+.coinIcon {
+  width: 30px;
+  height: 35px;
+}
+
+.balanceLabel {
+  font-family: $font-family;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 125%;
+  letter-spacing: -0.03em;
+  text-align: left;
+  color: $chernyy;
+  opacity: 0.6;
+}
+
+.walletOptions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.walletButton {
+  border: 1px solid $chernyy;
+  border-radius: 44px;
+  padding: 6px 8px;
+  width: 169px;
+  height: 32px;
+  background: $background-second;
+  font-family: $font-family;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 167%;
+  letter-spacing: -0.04em;
+  text-align: center;
+  color: $total-black;
+  cursor: pointer;
+}
+
+.walletButton:hover {
+  background: $blue;
+}
+
+.disconnectButton {
+  font-family: $font-family;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: $red;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.disconnectButton:hover {
+  color: darken($red, 20%);
+}

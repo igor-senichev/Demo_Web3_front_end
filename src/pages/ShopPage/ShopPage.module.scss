@@ -1,0 +1,76 @@
+// src/pages/ShopPage/ShopPage.module.scss
+@import "../../assets/styles/variables.scss";
+
+.container {
+  width: 375px;
+  height: 800px;
+  border: 2px solid gray;
+  border-radius: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 16px;
+}
+
+.centralBlock {
+  width: 343px;
+  height: 576px;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.contentFilling {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.sections {
+  font-family: $font-family;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 62%;
+  letter-spacing: -0.02em;
+  text-align: left;
+  color: var(--chernyy);
+  margin-bottom: 48px;
+}
+
+.actionButton {
+  border: 1px solid $chernyy;
+  border-radius: 16px;
+  padding: 8px 4px;
+  width: 343px;
+  height: 36px;
+  background: $background-second;
+  text-align: center;
+  cursor: pointer;
+  font-family: $font-family;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  color: $chernyy;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.actionButton:hover {
+  background: $blue;
+}
+
+.actionButton:active {
+  background: $blue2;
+}

@@ -22,25 +22,23 @@ export function Jetton({ balance }: JettonProps) {
     balance: jettonBalance,
     transferToncoin,
     transferredAmount,
-    fetchBalance, // добавляю функцию fetchBalance
+    fetchBalance,
   } = useJettonContract()
   const [transferAmount, setTransferAmount] = useState("")
   const { masterWalletAddress } = useJettonContract()
 
-  // Обработчик изменения значения в input
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
-    // Разрешаю ввод только чисел, точек и запятых
+
     if (/^\d*[\.,]?\d*$/.test(value)) {
       setTransferAmount(value.replace(",", "."))
     }
   }
 
-  // Обработчик нажатия на кнопку "Transfer Toncoin"
   const handleTransferClick = async () => {
     const amount = parseFloat(transferAmount)
     if (!isNaN(amount) && amount > 0) {
-      const success = await transferToncoin(amount) // Ожидаю результат операции
+      const success = await transferToncoin(amount)
       if (success) {
         console.log(`Переведено ${amount} TON на Мастер кошелек`)
         // Обновляю баланс через определенные интервалы времени
@@ -79,14 +77,6 @@ export function Jetton({ balance }: JettonProps) {
               : "Loading..."}
           </div>
         </FlexBoxRow>
-        {/* <FlexBoxRow>
-          Game wallet balance:
-          <div>
-            {transferredAmount !== null
-              ? `${Math.floor(transferredAmount * 100) / 100} TON`
-              : "Loading..."}
-          </div>
-        </FlexBoxRow> */}
         <FlexBoxRow style={{ marginTop: "20px" }}>
           <Input
             type="text"
