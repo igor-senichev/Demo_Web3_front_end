@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import styles from "./WithdrawalOfFundsToWallet.module.scss"
 import HeaderApps from "../../components/headerApps"
 import FooterApps from "../../components/footerApps"
-import TonTranslation from "../TonTranslation/TonTranslation"
+import ToneOutput from "../ToneOutput/ToneOutput"
 
 const WithdrawalOfFundsToWallet: React.FC = () => {
   const navigate = useNavigate()
@@ -22,7 +22,7 @@ const WithdrawalOfFundsToWallet: React.FC = () => {
       <div className={styles.centralBlock}>
         <span className={styles.sections}>Вывод игрового баланса</span>
         <div className={styles.loginWindowWrapper}>
-          <TonTranslation />
+          <ToneOutput />
         </div>
         <button
           className={styles.backButton}
