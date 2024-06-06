@@ -5,7 +5,7 @@ import GramCoinIcon from "../assets/img/GramCoin.svg"
 import BitCoinIcon from "../assets/img/BitCoin.svg"
 import DogCoinIcon from "../assets/img/DogCoin.svg"
 import TonGameCoinIcon from "../assets/img/TonGmameCoin.svg"
-import EnergyBarIcon from "../assets/img/EnergyBar.svg"
+import EnergyBarIcon from "../assets/img/energyBar.svg"
 import IconEnergy from "../assets/img/iconEnergy.svg"
 
 interface HeaderAppsProps {
