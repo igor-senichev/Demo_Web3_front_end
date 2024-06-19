@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import styles from "./ToneOutput.module.scss"
-import { Jetton } from "../../components/Jetton"
+import { JettonСonclusion } from "../../components/JettonСonclusion"
 import { Button, FlexBoxCol, FlexBoxRow } from "../../components/styled/styled"
 import { CHAIN, TonConnectButton, useTonWallet } from "@tonconnect/ui-react"
 import { useTonConnect } from "../../hooks/useTonConnect"
@@ -9,6 +9,7 @@ import "@twa-dev/sdk"
 import { useTonClient } from "../../hooks/useTonClient"
 import { Address, fromNano } from "ton"
 import { useNavigate } from "react-router-dom"
+import { useAmount } from "../../context/AmountContext"
 
 const ToneOutput: React.FC = () => {
   const { network } = useTonConnect()
@@ -18,6 +19,8 @@ const ToneOutput: React.FC = () => {
   const [balance, setBalance] = useState<number | null>(null)
   const { client } = useTonClient()
   const navigate = useNavigate()
+
+  const { amountTonGame, setAmountTonGame } = useAmount()
 
   useEffect(() => {
     const sendWalletAddressToBackend = async (address: string) => {
@@ -61,8 +64,8 @@ const ToneOutput: React.FC = () => {
     }
 
     fetchBalance()
-    const intervalId = setInterval(fetchBalance, 10000) // Обновляю баланс каждые 10 секунд
-    return () => clearInterval(intervalId) // Очищаю интервал при размонтировании компонента
+    const intervalId = setInterval(fetchBalance, 10000)
+    return () => clearInterval(intervalId)
   }, [client, userWalletAddress])
 
   return (
@@ -79,11 +82,11 @@ const ToneOutput: React.FC = () => {
                 : "N/A"}
             </Button>
           </FlexBoxRow>
-          <Jetton balance={balance} onNavigate={navigate} />
-          {/* {userWalletAddress && (
-            <div>Адрес кошелька пользователя в HEX: {userWalletAddress}</div>
-          )}
-          {userId && <div>ID пользователя: {userId}</div>} */}
+          <JettonСonclusion
+            balance={balance}
+            onNavigate={navigate}
+            amountTonGame={amountTonGame}
+          />
         </FlexBoxCol>
       </div>
     </div>

@@ -1,0 +1,41 @@
+@import "../../../assets/styles/variables.scss";
+
+.tonGameCoin {
+  border-radius: 61px;
+  padding: 1px;
+  width: 90px;
+  height: 26px;
+  background: $blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iconTonBlock {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.iconTonBlock:hover {
+  transform: scale(1.1);
+}
+
+.iconTonBlock:active {
+  transform: scale(1.2);
+}
+
+.amountTonGameBlock {
+  font-family: $font-family;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 61px;
+  margin-left: 5px;
+}

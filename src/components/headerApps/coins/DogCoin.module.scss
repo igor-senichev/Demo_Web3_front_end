@@ -1,0 +1,26 @@
+@import "../../../assets/styles/variables.scss";
+
+.dogCoinBlock {
+  width: 71px;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iconDogBlock {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.amountDogBlock {
+  font-family: $font-family;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 42px;
+  margin-left: 5px;
+}

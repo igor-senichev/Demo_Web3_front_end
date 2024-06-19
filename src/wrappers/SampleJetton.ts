@@ -1,1 +1,1 @@
-export * from "../../build/SampleJetton/tact_SampleJetton"
+export * from "../../build/SampleJettonMaster/tact_SampleJettonMaster"

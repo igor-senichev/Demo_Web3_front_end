@@ -97,7 +97,7 @@ export function Jetton({ balance, onNavigate }: JettonProps) {
           }
           onClick={handleTransferClick}
         >
-          Transfer Toncoin
+          Перевести Toncoin
         </Button>
       </FlexBoxCol>
     </Card>

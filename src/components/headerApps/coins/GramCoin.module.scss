@@ -1,0 +1,26 @@
+@import "../../../assets/styles/variables.scss";
+
+.gramCoinBlock {
+  width: 71px;
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.iconGramBlock {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.amountGramBlock {
+  font-family: $font-family;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 42px;
+  margin-left: 5px;
+}

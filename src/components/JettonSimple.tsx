@@ -1,5 +1,3 @@
-import React from "react"
-import { useNavigate } from "react-router-dom"
 import { Address } from "ton-core"
 import { useTonConnect } from "../hooks/useTonConnect"
 import { Card, FlexBoxCol, FlexBoxRow, Button, Ellipsis } from "./styled/styled"

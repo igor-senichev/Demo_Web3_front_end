@@ -1,0 +1,51 @@
+@import "../../assets/styles/variables.scss";
+
+.energy {
+  width: 344px;
+  height: 44px;
+  margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bandEnergy {
+  position: relative;
+  width: 344px;
+  height: 5px;
+  background-color: #c2c2c2;
+  border-radius: 5px;
+  border: 1pt solid #393931;
+  overflow: hidden; 
+}
+
+.bandEnergyFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #393931;
+  transition: width 0.5s ease-in-out;
+}
+
+.blockValuesEnergy {
+  width: 344px;
+  height: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.valueEnergyBlock {
+  font-family: $font-family;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 167%;
+  letter-spacing: -0.04em;
+  text-align: right;
+  color: $chernyy;
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
+}

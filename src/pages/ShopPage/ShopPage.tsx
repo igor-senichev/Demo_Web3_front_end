@@ -1,8 +1,8 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./ShopPage.module.scss"
-import HeaderApps from "../../components/headerApps"
-import FooterApps from "../../components/footerApps"
+import HeaderApps from "../../components/headerApps/headerApps"
+import FooterApps from "../../components/footerApps/footerApps"
 
 const ShopPage: React.FC = () => {
   const navigate = useNavigate()
