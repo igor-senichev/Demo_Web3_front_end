@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react"
 import { Address, fromNano, OpenedContract, toNano } from "ton-core"
-import { SampleJettonMaster } from "../../build/SampleJettonMaster/tact_SampleJettonMaster"
-import { UserWallet } from "../../build/UserWallet/tact_UserWallet"
+import { Mint, SampleJetton } from "../../build/SampleJetton/tact_SampleJetton"
+import { JettonDefaultWallet } from "../../build/SampleJetton/tact_JettonDefaultWallet"
 import { useAsyncInitialize } from "./useAsyncInitialize"
 import { useTonClient } from "./useTonClient"
 import { useTonConnect } from "./useTonConnect"
@@ -21,21 +21,19 @@ export function useJettonContract() {
   const jettonContract = useAsyncInitialize(async () => {
     if (!client || !wallet) return null
     const masterAddress = "EQA50bCTQLaKz3p6HWAsIqmlcpePWK8IcGZ3xbaVSnZo2zZ9"
-    const contract = SampleJettonMaster.fromAddress(
-      Address.parse(masterAddress)
-    )
+    const contract = SampleJetton.fromAddress(Address.parse(masterAddress))
     setMasterWalletAddress(masterAddress)
-    return client.open(contract) as OpenedContract<SampleJettonMaster>
+    return client.open(contract) as OpenedContract<SampleJetton>
   }, [client, wallet])
 
   const jettonWalletContract = useAsyncInitialize(async () => {
     if (!jettonContract || !client || !wallet) return null
 
     try {
-      const jettonWalletAddress = await jettonContract.getGetBalance()
-      return client.open(
-        UserWallet.fromAddress(jettonWalletAddress)
-      ) as OpenedContract<UserWallet>
+      const jettonWalletAddress = await jettonContract.getGetWalletAddress(
+        Address.parse(wallet)
+      )
+      return client.open(JettonDefaultWallet.fromAddress(jettonWalletAddress))
     } catch (error) {
       console.error("Ошибка при получении адреса Jetton Wallet:", error)
       return null
@@ -46,8 +44,8 @@ export function useJettonContract() {
     if (!jettonWalletContract) return
     setBalance(null)
     try {
-      const walletData = await jettonWalletContract.getGetBalance()
-      setBalance(fromNano(walletData))
+      const walletData = await jettonWalletContract.getGetWalletData()
+      setBalance(fromNano(walletData.balance))
     } catch (error) {
       console.error("Ошибка при получении данных кошелька Jetton:", error)
       setBalance(null)
@@ -69,7 +67,7 @@ export function useJettonContract() {
 
     const amountNano = toNano(amount.toString())
     const message = {
-      to: Address.parse(masterWalletAddress!),
+      to: Address.parse("EQA50bCTQLaKz3p6HWAsIqmlcpePWK8IcGZ3xbaVSnZo2zZ9"),
       value: amountNano,
       bounce: false,
       body: null,
@@ -86,34 +84,26 @@ export function useJettonContract() {
     }
   }
 
-  const transferFromMasterWallet = async (amount: number, to: string) => {
-    if (!jettonContract || !wallet) return false
-
-    const amountNano = toNano(amount.toString())
-    const message = {
-      $$type: "TransferToUser",
-      amount: amountNano,
-      userAddress: Address.parse(to),
-    }
-
-    try {
-      await jettonContract.send(sender, { value: toNano("0.05") }, message)
-      console.log("Перевод с мастер-кошелька выполнен успешно")
-      setTransferredAmount((prev) => prev + amount)
-      return true
-    } catch (error) {
-      console.error("Ошибка при переводе с мастер-кошелька:", error)
-      return false
-    }
-  }
-
   return {
     masterWalletAddress,
     jettonWalletAddress: jettonWalletContract?.address.toString(),
     balance: balance,
     transferredAmount,
+    mint: () => {
+      const message: Mint = {
+        $$type: "Mint",
+        amount: 150n,
+      }
+
+      jettonContract?.send(
+        sender,
+        {
+          value: toNano("0.05"),
+        },
+        message
+      )
+    },
     transferToncoin,
-    transferFromMasterWallet,
     fetchBalance,
   }
 }

@@ -16,8 +16,47 @@ slice __tact_verify_address(slice address) inline {
     return (cs, __tact_verify_address(raw));
 }
 
+(slice, slice) __tact_load_address_opt(slice cs) inline {
+    slice raw = cs~load_msg_addr();
+    if (raw.preload_uint(2) != 0) {
+        return (cs, __tact_verify_address(raw));
+    } else {
+        return (cs, null());
+    }
+}
+
 builder __tact_store_address(builder b, slice address) inline {
     return b.store_slice(__tact_verify_address(address));
+}
+
+builder __tact_store_address_opt(builder b, slice address) inline {
+    if (null?(address)) {
+        b = b.store_uint(0, 2);
+        return b;
+    } else {
+        return __tact_store_address(b, address);
+    }
+}
+
+slice __tact_create_address(int chain, int hash) inline {
+    var b = begin_cell();
+    b = b.store_uint(2, 2);
+    b = b.store_uint(0, 1);
+    b = b.store_int(chain, 8);
+    b = b.store_uint(hash, 256);
+    var addr = b.end_cell().begin_parse();
+    return __tact_verify_address(addr);
+}
+
+slice __tact_compute_contract_address(int chain, cell code, cell data) inline {
+    var b = begin_cell();
+    b = b.store_uint(0, 2);
+    b = b.store_uint(3, 2);
+    b = b.store_uint(0, 1);
+    b = b.store_ref(code);
+    b = b.store_ref(data);
+    var hash = cell_hash(b.end_cell());
+    return __tact_create_address(chain, hash);
 }
 
 int __tact_my_balance() inline {
@@ -44,7 +83,35 @@ int __tact_slice_eq_bits(slice a, slice b) inline {
     return equal_slice_bits(a, b);
 }
 
+cell __tact_dict_set_code(cell dict, int id, cell code) inline {
+    return udict_set_ref(dict, 16, id, code);
+}
+
+cell __tact_dict_get_code(cell dict, int id) inline {
+    var (data, ok) = udict_get_ref?(dict, 16, id);
+    throw_unless(135, ok);
+    return data;
+}
+
 forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
+
+cell $global_emptyCell() impure inline {
+    return end_cell(begin_cell());
+}
+
+slice $Cell$_fun_asSlice(cell $self) impure inline {
+    var ($self) = $self;
+    return begin_parse($self);
+}
+
+slice $global_emptySlice() impure inline {
+    return $Cell$_fun_asSlice($global_emptyCell());
+}
+
+slice $global_contractAddress((cell, cell) $s) impure inline {
+    var (($s'code, $s'data)) = $s;
+    return __tact_compute_contract_address(0, $s'code, $s'data);
+}
 
 () $global_send((int, slice, int, int, cell, cell, cell) $params) impure inline_ref {
     var (($params'bounce, $params'to, $params'value, $params'mode, $params'body, $params'code, $params'data)) = $params;
@@ -54,7 +121,7 @@ forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
     $b = store_int($b, 0, 3);
     $b = __tact_store_address($b, $params'to);
     $b = store_coins($b, $params'value);
-    $b = store_int($b, 0, 105);
+    $b = store_int($b, 0, ((((1 + 4) + 4) + 64) + 32));
     if (( ((~ null?($params'code))) ? (true) : ((~ null?($params'data))) )) {
         $b = __tact_store_bool($b, true);
         builder $bc = begin_cell();
@@ -89,8 +156,8 @@ forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
     send_raw_message($c, $params'mode);
 }
 
-((slice, int), ()) $UserWallet$_fun_forward((slice, int) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
-    var (($self'owner, $self'balance)) = $self;
+((int, slice, cell, int), ()) $SampleJetton$_fun_forward((int, slice, cell, int) $self, slice $to, cell $body, int $bounce, tuple $init) impure inline_ref {
+    var (($self'totalSupply, $self'owner, $self'content, $self'mintable)) = $self;
     var ($init) = $init;
     cell $code = null();
     cell $data = null();
@@ -105,22 +172,16 @@ forall X0, X1 -> (X0, X1) __tact_tuple_destroy_2(tuple v) asm "2 UNTUPLE";
         int $balanceBeforeMessage = ($balance - $ctx'value);
         if (($balanceBeforeMessage < 0)) {
             raw_reserve(0, 0);
-            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, (128 | 2), $body, $code, $data));
-            return (($self'owner, $self'balance), ());
+            $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, (128 + 2), $body, $code, $data));
+            return (($self'totalSupply, $self'owner, $self'content, $self'mintable), ());
         }
     }
-    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, (64 | 2), $body, $code, $data));
-    return (($self'owner, $self'balance), ());
+    $global_send($SendParameters$_constructor_bounce_to_value_mode_body_code_data($bounce, $to, 0, (64 + 2), $body, $code, $data));
+    return (($self'totalSupply, $self'owner, $self'content, $self'mintable), ());
 }
 
-((slice, int), ()) $UserWallet$_fun_reply((slice, int) $self, cell $body) impure inline {
-    var (($self'owner, $self'balance)) = $self;
-    ($self'owner, $self'balance)~$UserWallet$_fun_forward(__tact_context_get_sender(), $body, true, null());
-    return (($self'owner, $self'balance), ());
-}
-
-((slice, int), ()) $UserWallet$_fun_notify((slice, int) $self, cell $body) impure inline {
-    var (($self'owner, $self'balance)) = $self;
-    ($self'owner, $self'balance)~$UserWallet$_fun_forward(__tact_context_get_sender(), $body, false, null());
-    return (($self'owner, $self'balance), ());
+((int, slice, cell, int), ()) $SampleJetton$_fun_notify((int, slice, cell, int) $self, cell $body) impure inline {
+    var (($self'totalSupply, $self'owner, $self'content, $self'mintable)) = $self;
+    ($self'totalSupply, $self'owner, $self'content, $self'mintable)~$SampleJetton$_fun_forward(__tact_context_get_sender(), $body, false, null());
+    return (($self'totalSupply, $self'owner, $self'content, $self'mintable), ());
 }
