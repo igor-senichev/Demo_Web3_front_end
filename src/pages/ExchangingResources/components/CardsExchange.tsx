@@ -15,8 +15,11 @@ const CardsExchange: React.FC<CardsExchangeProps> = ({
   const [valueCoinsExchange, setValueCoinsExchange] = useState<string>("0")
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/^0+/, "") 
-    setValueCoinsExchange(value === "" ? "0" : value) // Если значение нет, устанавливаю "0"
+    const value = e.target.value.replace(/^0+/, "")
+    if (value === "" || parseFloat(value) >= 0) {
+      // Проверяю, что значение не меньше нуля или пустое
+      setValueCoinsExchange(value === "" ? "0" : value) // Если пусто, устанавливаю "0"
+    }
   }
 
   return (
