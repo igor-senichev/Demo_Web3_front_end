@@ -1,4 +1,3 @@
-// src/context/EnergyContext.tsx
 import React, {
   createContext,
   useContext,
@@ -23,7 +22,9 @@ export const EnergyProvider: React.FC<{ children: ReactNode }> = ({
       const now = new Date()
       const hours = now.getHours()
       const minutes = now.getMinutes()
+      //Вычисляю общее количество минут с начала дня:
       const totalMinutes = hours * 60 + minutes
+      //Расчет значения энергии в процентах
       const value = Math.floor((totalMinutes / (24 * 60)) * 100)
       setValueEnergy(value)
     }

@@ -1,25 +1,13 @@
 @import "../../assets/styles/variables.scss";
+@import "../../assets/styles/mixins.scss";
 
 .container {
-  width: 375px;
-  height: 800px;
-  border: 2px solid gray;
-  border-radius: 44px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 0 16px;
+  @include container;
 }
 
 .centralBlock {
   width: 343px;
   height: 576px;
-  margin-bottom: 8px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;

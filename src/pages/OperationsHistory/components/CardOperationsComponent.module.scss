@@ -1,0 +1,106 @@
+@import "../../../assets/styles/variables.scss";
+@import "../../../assets/styles/mixins.scss";
+
+.blockCardOperations {
+  border: 1px solid $chernyy;
+  border-radius: 16px;
+  padding: 8px 12px;
+  background: $background-second;
+  transition: height 0.2s ease;
+  overflow: hidden;
+}
+
+.blockCardOperations.expanded {
+  height: 235px;
+}
+
+.blockCardOperations.collapsed {
+  height: 44px;
+}
+
+.blockMainInformation {
+  padding: 4px 0px;
+  width: 319px;
+  height: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.blockAmountOperations {
+  display: flex;
+  align-items: center;
+}
+
+.variableAmountsOperations {
+  font-family: $font-family;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  text-align: right;
+  color: $chernyy;
+  margin-right: 4px;
+}
+
+.blockAmountOperations img,
+.arrowIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: $grey;
+  margin-top: 8px;
+}
+
+.blockDetailsOperations,
+.blockSenderWalletOperations,
+.blockRecipientWalletOperations,
+.blockIDTransactionOperations {
+  width: 319px;
+  height: 39px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blockDataName,
+.blockSenderWallet,
+.blockRecipientWallet,
+.blockIDTransaction {
+  font-family: $font-family;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 167%;
+  letter-spacing: -0.04em;
+  color: $chernyy;
+}
+
+.blockDateValue,
+.blockSenderWalletAddres,
+.blockRecipientWalletAddres,
+.blockIDTransactionAddres {
+  font-family: $font-family;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 167%;
+  letter-spacing: -0.04em;
+  color: $chernyy;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.show {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.hide {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}

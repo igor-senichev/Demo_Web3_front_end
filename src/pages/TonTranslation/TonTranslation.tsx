@@ -80,10 +80,6 @@ const TonTranslation: React.FC = () => {
             </Button>
           </FlexBoxRow>
           <Jetton balance={balance} onNavigate={navigate} />
-          {/* {userWalletAddress && (
-            <div>Адрес кошелька пользователя в HEX: {userWalletAddress}</div>
-          )}
-          {userId && <div>ID пользователя: {userId}</div>} */}
         </FlexBoxCol>
       </div>
     </div>

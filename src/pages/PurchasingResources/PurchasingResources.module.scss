@@ -1,29 +1,19 @@
 @import "../../assets/styles/variables.scss";
+@import "../../assets/styles/mixins.scss";
 
 .container {
-  width: 375px;
-  height: 800px;
-  border: 2px solid gray;
-  border-radius: 44px;
+  @include container;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 0 16px;
+  justify-content: space-between;
 }
 
 .centralBlock {
-  width: 343px;
-  height: 576px;
-  margin-bottom: 8px;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
   align-items: flex-start;
   position: relative;
+  flex-grow: 1;
 }
 
 .sections {
@@ -35,4 +25,48 @@
   text-align: left;
   color: $chernyy;
   margin-bottom: 35px;
+}
+
+.blockFilterResources {
+  width: 343px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.filterButton {
+  border: 1px solid $chernyy;
+  border-radius: 51px;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  background: $background-second;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 8px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover,
+  &:active,
+  &.active {
+    border: 1px solid $chernyy;
+    background: $blue;
+  }
+}
+
+.spacing {
+  margin-bottom: 16px;
+}
+
+.blockCardResources {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
 }
