@@ -10,7 +10,7 @@ const AmountContext = createContext<AmountContextProps | undefined>(undefined)
 export const AmountProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [amountTonGame, setAmountTonGame] = useState(0.05) // Устанавливаю пока начальное значение 0.15, позже эти значения надо будет подтягивать с бека
+  const [amountTonGame, setAmountTonGame] = useState(0.05) // Устанавливаю пока начальное значение 0.05, позже эти значения надо будет подтягивать с бека
 
   return (
     <AmountContext.Provider value={{ amountTonGame, setAmountTonGame }}>

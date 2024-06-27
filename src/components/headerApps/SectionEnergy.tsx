@@ -11,7 +11,7 @@ const SectionEnergy: React.FC = () => {
       <div className={styles.bandEnergy}>
         <div
           className={styles.bandEnergyFill}
-          style={{ width: `${valueEnergy}%` }}
+          style={{ width: `${100 - valueEnergy}%` }}
         ></div>
       </div>
       <div className={styles.blockValuesEnergy}>

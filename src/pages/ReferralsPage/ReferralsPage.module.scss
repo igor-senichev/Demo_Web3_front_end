@@ -3,15 +3,19 @@
 
 .container {
   @include container;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .centralBlock {
   width: 343px;
-  height: 576px;
+  flex-grow: 1;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   position: relative;
+  padding-bottom: 15px;
 }
 
 .sections {
@@ -22,5 +26,105 @@
   letter-spacing: -0.02em;
   text-align: left;
   color: $chernyy;
-  margin-bottom: 35px;
+  margin-bottom: 32px;
+}
+
+.blockReferralsFriends {
+  width: 343px;
+  height: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.blockNumberReferrals {
+  display: flex;
+  align-items: center;
+  height: 32px;
+
+  span {
+    font-family: $font-family;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 83%;
+    letter-spacing: -0.02em;
+    text-align: right;
+    color: $chernyy;
+  }
+
+  .blockSpecificNumberReferrals {
+    border: 1px solid $chernyy;
+    height: 31px;
+    border-radius: 51px;
+    min-width: 58px;
+    background: $blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px;
+    flex-grow: 1;
+
+    img {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      margin-left: 10px;
+    }
+
+    .variableNumberReferrals {
+      font-family: $font-family;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 167%;
+      letter-spacing: -0.04em;
+      text-align: right;
+      color: $total-black;
+      margin-right: 10px;
+    }
+  }
+}
+
+.blockButtonsReferral {
+  height: 32px;
+  display: flex;
+  align-items: center;
+
+  .buttonsReferralAdd {
+    border: 1px solid $chernyy;
+    border-radius: 53px;
+    padding: 1px 8px;
+    height: 32px;
+    background: #c7c6c6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: $font-family;
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 167%;
+    letter-spacing: -0.04em;
+    text-align: right;
+    color: $total-black;
+    white-space: nowrap;
+    flex-grow: 1;
+
+    &:hover {
+      background: $blue;
+      color: $chernyy;
+    }
+
+    &:active {
+      background: $blue2;
+      color: $chernyy;
+    }
+  }
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  justify-items: center;
 }

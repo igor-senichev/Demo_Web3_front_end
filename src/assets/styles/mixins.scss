@@ -1,7 +1,6 @@
 @mixin container {
   width: 375px;
-  min-height: 800px; // Минимальная высота 800px
-  // height: 800px;
+  min-height: 800px;
   border: 2px solid gray;
   border-radius: 44px;
   display: flex;
