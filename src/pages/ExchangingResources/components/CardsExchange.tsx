@@ -1,24 +1,36 @@
 import React, { useState } from "react"
 import styles from "./CardsExchange.module.scss"
+import { useAmount } from "../../../context/AmountContext"
 
 interface CardsExchangeProps {
   initialIcon: string
   targetIcon: string
   exchangeRate: number
+  maxAmount: number // Добавляю пропс для максимального значения монет
 }
 
 const CardsExchange: React.FC<CardsExchangeProps> = ({
   initialIcon,
   targetIcon,
   exchangeRate,
+  maxAmount,
 }) => {
   const [valueCoinsExchange, setValueCoinsExchange] = useState<string>("0")
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/^0+/, "")
-    if (value === "" || parseFloat(value) >= 0) {
-      // Проверяю, что значение не меньше нуля или пустое
-      setValueCoinsExchange(value === "" ? "0" : value) // Если пусто, устанавливаю "0"
+    let value = e.target.value
+
+    // Удаляю начальные нули, кроме случая, когда значение равно "0"
+    if (value !== "0") {
+      value = value.replace(/^0+/, "")
+    }
+
+    const parsedValue = parseFloat(value)
+
+    if (value === "" || (parsedValue >= 0 && parsedValue <= maxAmount)) {
+      setValueCoinsExchange(value === "" ? "0" : value)
+    } else if (parsedValue > maxAmount) {
+      setValueCoinsExchange(maxAmount.toString())
     }
   }
 
@@ -32,6 +44,8 @@ const CardsExchange: React.FC<CardsExchangeProps> = ({
             className={styles.inputCoinValues}
             value={valueCoinsExchange}
             onChange={handleInputChange}
+            min="0"
+            max={maxAmount.toString()}
           />
         </div>
         <span>=</span>
