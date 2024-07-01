@@ -1,15 +1,16 @@
-import React, { useState } from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./PersonalAccount.module.scss"
 import HeaderApps from "../../components/headerApps/headerApps"
 import FooterApps from "../../components/footerApps/footerApps"
 import TonGameCoinIcon from "../../assets/img/TonGmameCoin.svg"
 import { useTonConnect } from "../../hooks/useTonConnect"
+import { useAmount } from "../../context/AmountContext"
 
 const PersonalAccount: React.FC = () => {
   const navigate = useNavigate()
   const { disconnect } = useTonConnect() // Получаю функцию для отключения кошелька
-  const [amountTonGame, setAmountTonGame] = useState(0.0) // Инициализирую переменную с балансом
+  const { amountTonGame } = useAmount() // Получаю баланс из контекста
 
   const handleLoginClick = () => {
     navigate("/login")

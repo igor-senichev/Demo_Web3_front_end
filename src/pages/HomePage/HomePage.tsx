@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 import styles from "./HomePage.module.scss"
 import HeaderApps from "../../components/headerApps/headerApps"
 import FooterApps from "../../components/footerApps/footerApps"
@@ -25,8 +26,7 @@ import Equipment_Laptop_4 from "../../assets/img/my_Equipment_Laptop_4.svg"
 const HomePage: React.FC = () => {
   const navigate = useNavigate()
 
-  // Пример данных оборудования, которые получим с бэкенда
-  const equipment = [
+  const initialEquipment = [
     {
       type: "ASIC",
       image: Equipment_ASIC_1,
@@ -57,6 +57,11 @@ const HomePage: React.FC = () => {
     },
   ]
 
+  const [variableMiningAsic, setVariableMiningAsic] = useState(68)
+  const [variableMiningVideoCard, setVariableMiningVideoCard] = useState(58)
+  const [variableMiningLaptop, setVariableMiningLaptop] = useState(48)
+  const [equipment, setEquipment] = useState(initialEquipment)
+
   const getMostPowerfulEquipment = (
     equipment: string[],
     maxCount: number,
@@ -75,6 +80,24 @@ const HomePage: React.FC = () => {
 
     return displayedEquipment
   }
+
+  // Пример получения с бекенда
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await axios.get("/api/mining-values")
+  //     const { miningValues, equipment } = response.data
+  //     setVariableMiningAsic(miningValues.variableMiningAsic)
+  //     setVariableMiningVideoCard(miningValues.variableMiningVideoCard)
+  //     setVariableMiningLaptop(miningValues.variableMiningLaptop)
+  //     setEquipment(equipment)
+  //   } catch (error) {
+  //     console.error("Error fetching mining values and equipment:", error)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   fetchData()
+  // }, [])
 
   const asicEquipment = equipment
     .filter((e) => e.type.trim() === "ASIC")
@@ -105,7 +128,9 @@ const HomePage: React.FC = () => {
               <span className={styles.asicText}>Асик</span>
               <div className={styles.ASICMining}>
                 <img src={BitCoinIcon} alt="Bit Coin" />
-                <span className={styles.miningText}>+ 68 / day</span>
+                <span className={styles.miningText}>
+                  + {variableMiningAsic} / day
+                </span>
               </div>
             </div>
             <div className={styles.ASICIconBlock}>
@@ -118,7 +143,9 @@ const HomePage: React.FC = () => {
               <span className={styles.videoCardText}>Видеокарты</span>
               <div className={styles.videoCardMining}>
                 <img src={DogCoin} alt="Dog Coin" />
-                <span className={styles.miningText}>+ 68 / day</span>
+                <span className={styles.miningText}>
+                  + {variableMiningVideoCard} / day
+                </span>
               </div>
             </div>
             <div className={styles.VideoCardIconBlock}>
@@ -135,7 +162,9 @@ const HomePage: React.FC = () => {
               <span className={styles.LaptopText}>Ноутбуки</span>
               <div className={styles.LaptopMining}>
                 <img src={GramCoin} alt="Gram Coin" />
-                <span className={styles.miningText}>+ 68 / day</span>
+                <span className={styles.miningText}>
+                  + {variableMiningLaptop} / day
+                </span>
               </div>
             </div>
             <div className={styles.LaptopIconBlock}>
