@@ -5,17 +5,18 @@
   @include container;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .centralBlock {
   width: 343px;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* Центрируем карточки */
   position: relative;
-  padding-bottom: 15px;
+  flex-grow: 1;
+  padding-bottom: 20px; /* Добавим отступ перед футером */
 }
 
 .sections {
@@ -24,9 +25,10 @@
   font-size: 32px;
   line-height: 62%;
   letter-spacing: -0.02em;
-  text-align: left;
+  text-align: left; /* Выравнивание по левому краю */
   color: $chernyy;
   margin-bottom: 32px;
+  align-self: flex-start; /* Выравнивание текста "Рефералы" по левому краю */
 }
 
 .blockReferralsFriends {
@@ -55,7 +57,7 @@
 
   .blockSpecificNumberReferrals {
     border: 1px solid $chernyy;
-    height: 31px;
+    height: 28px;
     border-radius: 51px;
     min-width: 58px;
     background: $blue;
@@ -86,7 +88,7 @@
 }
 
 .blockButtonsReferral {
-  height: 32px;
+  height: 33px;
   display: flex;
   align-items: center;
 
@@ -94,7 +96,7 @@
     border: 1px solid $chernyy;
     border-radius: 53px;
     padding: 1px 8px;
-    height: 32px;
+    height: 33px;
     background: #c7c6c6;
     display: flex;
     justify-content: center;
@@ -127,4 +129,8 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
   justify-items: center;
+}
+
+.footer {
+  margin-top: auto;
 }
