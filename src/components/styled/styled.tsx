@@ -4,7 +4,8 @@ import "../../assets/styles/variables.scss"
 export const Card = styled.div`
   padding: 18px 20px;
   border-radius: 25px;
-  background-color: white;
+  // background-color: white;
+  background-color: #121212;
 
   @media (prefers-color-scheme: dark) {
     background-color: #121212;
@@ -34,7 +35,7 @@ export const Button = styled.button`
   font-weight: 700;
   cursor: pointer;
   pointer-events: ${(props) => (props.disabled ? "none" : "inherit")};
-  transition: background-color 0.3s; 
+  transition: background-color 0.3s;
 
   &:hover {
     background-color: ${(props) =>
