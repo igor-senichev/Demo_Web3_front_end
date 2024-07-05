@@ -6,12 +6,7 @@
 }
 
 .centralBlock {
-  width: 343px;
-  height: 576px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  @include centralBlockFlex1;
 }
 
 .contentFilling {

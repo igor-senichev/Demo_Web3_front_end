@@ -9,12 +9,7 @@
 }
 
 .centralBlock {
-  width: 343px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  flex-grow: 1;
+  @include centralBlockFlexGrow;
   margin-bottom: 30px;
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import styles from "./OperationsHistory.module.scss"
 import HeaderApps from "../../components/headerApps/headerApps"
@@ -8,9 +8,13 @@ import CardOperationsComponent from "./components/CardOperationsComponent"
 const OperationsHistory: React.FC = () => {
   const navigate = useNavigate()
   const [filter, setFilter] = useState<string>("All")
+  const [expandedCardIndex, setExpandedCardIndex] = useState<number | null>(
+    null
+  )
 
   const handleFilterChange = (type: string) => {
     setFilter(type)
+    setExpandedCardIndex(null) // Сбрасываем состояние раскрытия карточек
   }
 
   const operations = [
@@ -91,6 +95,9 @@ const OperationsHistory: React.FC = () => {
           {filteredOperations.map((operation, index) => (
             <CardOperationsComponent
               key={index}
+              index={index}
+              expandedCardIndex={expandedCardIndex}
+              setExpandedCardIndex={setExpandedCardIndex}
               buyingOrSellingValue={operation.buyingOrSellingValue}
               dateValue={operation.dateValue}
               userWallet={operation.userWallet}

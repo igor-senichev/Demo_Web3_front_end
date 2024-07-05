@@ -6,11 +6,8 @@
 }
 
 .centralBlock {
-  height: 576px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
+  @include centralBlockFlex1;
+  align-items: center; /* Центрируем карточки */
 }
 
 .sections {

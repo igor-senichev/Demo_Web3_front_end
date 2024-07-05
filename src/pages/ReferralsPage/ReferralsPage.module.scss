@@ -10,12 +10,8 @@
 }
 
 .centralBlock {
-  width: 343px;
-  display: flex;
-  flex-direction: column;
+  @include centralBlockFlexGrow;
   align-items: center; /* Центрируем карточки */
-  position: relative;
-  flex-grow: 1;
   padding-bottom: 20px; /* Добавим отступ перед футером */
 }
 

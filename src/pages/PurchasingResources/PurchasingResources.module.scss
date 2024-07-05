@@ -9,11 +9,7 @@
 }
 
 .centralBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-  flex-grow: 1;
+  @include centralBlockFlexGrow;
 }
 
 .sections {

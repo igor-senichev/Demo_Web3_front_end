@@ -5,6 +5,9 @@ import ArrowUpIcon from "../../../assets/img/arrowUp.svg"
 import ArrowDownIcon from "../../../assets/img/arrowDown.svg"
 
 interface CardOperationsComponentProps {
+  index: number
+  expandedCardIndex: number | null
+  setExpandedCardIndex: (index: number | null) => void
   buyingOrSellingValue: string
   dateValue: string
   userWallet: string
@@ -13,21 +16,24 @@ interface CardOperationsComponentProps {
 }
 
 const CardOperationsComponent: React.FC<CardOperationsComponentProps> = ({
+  index,
+  expandedCardIndex,
+  setExpandedCardIndex,
   buyingOrSellingValue,
   dateValue,
   userWallet,
   masterWallet,
   idTransaction,
 }) => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false)
+  const isExpanded = index === expandedCardIndex
   const [showContent, setShowContent] = useState<boolean>(true)
 
   const toggleExpand = () => {
     if (isExpanded) {
       setShowContent(false)
-      setTimeout(() => setIsExpanded(false), 300)
+      setTimeout(() => setExpandedCardIndex(null), 300)
     } else {
-      setIsExpanded(true)
+      setExpandedCardIndex(index)
       setTimeout(() => setShowContent(true), 300)
     }
   }
